@@ -3,7 +3,6 @@ package cn.shiro.crmm;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.solr.client.solrj.SolrClient;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -48,13 +46,6 @@ public class SpringBootJavaBean  {
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
         return dataSource;
     } 
-    
-    
-    @Bean
-    public SolrTemplate solrTemplate(SolrClient client) throws Exception {
-		return new SolrTemplate(client) ;
-    	
-    }
     
     //创建SqlSessionFactory  bean
     @Bean
