@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.shiro.mapper.UserMapper">
+
+	<resultMap type="cn.shiro.mapper.UserMapper" id="financing">
+		<result column="bookName" property="bname"/>
+		<result column="bookAuthor" property="bauthor"/>
+		<result column="bookPublish" property="bpublish"/>
+		<result column="bookPage" property="bpage"/>
+		<result column="bookPrice" property="bprice"/>
+	</resultMap>
+	
+	<!-- 查询用户表 -->
+	<select id="userShow" resultType="cn.shiro.extity.User">		 
+   		SELECT * FROM `user`
+	</select>
+	<select id="userLogin" resultType="cn.shiro.extity.User">		 
+   		SELECT * FROM `user` where  accountName= #{accountName}
+		<where>
+			<!-- <if test="bname != null">and bookName like concat('%',#{bname},'%')</if>
+			<if test="bauthor != null">and bookAuthor like concat('%',#{bauthor},'%')</if>
+			<if test="bpublish != null">and bookPublish like concat('%',#{bpublish},'%')</if> -->
+		</where>
+	</select>
+	<!-- 查询角色表 -->
+	<select id="roleShow" resultType="cn.shiro.extity.Role">		 
+   		SELECT * FROM `role`
+	</select>
+	
+	<insert id="addUser" parameterType="cn.shiro.extity.User">
+		insert into `user` values(DEFAULT,#{userName},#{accountName},#{password},#{credentialsSalt})
+		<!-- insert into `user`(userName,accountName,password,credentialsSalt) values(#{userName},#{accountName},#{password},#{credentialsSalt}) -->
+	</insert>
+	<!-- 添加用户与角色关联表 -->
+	<insert id="addUserRole" parameterType="cn.shiro.extity.User_role">
+		insert into `user_role` values(#{userId},#{roleId})
+		<!-- insert into `user`(userName,accountName,password,credentialsSalt) values(#{userName},#{accountName},#{password},#{credentialsSalt}) -->
+	</insert>
+	<!-- 
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(1) FROM `books`
+		<where>
+			<if test="bname != null">and bookName like concat('%',#{bname},'%')</if>
+			<if test="bauthor != null">and bookAuthor like concat('%',#{bauthor},'%')</if>
+			<if test="bpublish != null">and bookPublish like concat('%',#{bpublish},'%')</if>
+		</where>
+	</select>
+	
+	<insert id="insertbooks" parameterType="cn.books.extity.books">
+		insert into `books`(bookName,bookAuthor,bookPublish,bookPage,bookPrice) values(#{bk.bname},#{bk.bauthor},#{bk.bpublish},#{bk.bpage},#{bk.bprice})
+	</insert>
+	
+	<select id="selectCountByID" parameterType="string" resultType="int">
+		select count(1) from financingproduct where id=#{_parameter}
+	</select>
+	
+	<delete id="deletebooks" parameterType="int">
+		delete from `books` where id=#{_parameter}
+	</delete>
+	
+	<select id="selectOnebooks" parameterType="string" resultMap="financing">
+		select id,risk,income,saleStarting,saleEnd,`end` from financingproduct where id=#{_parameter}
+	</select>
+	
+	<update id="updatebooks" parameterType="cn.books.extity.books">
+		update financingproduct set risk=#{risk},income=#{income},saleStarting=#{saleStart},saleEnd=#{saleEnd},`end`=#{end} where id=#{id}
+	</update> -->
+</mapper>

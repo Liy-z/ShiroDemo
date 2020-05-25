@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.shiro.mapper.ResourcesMapper">
+	
+	<select id="showResources" resultType="cn.shiro.extity.Resources">		 
+   		SELECT * FROM `resources` where  id in(
+		select resId from res_user
+		where userId=#{userId})
+	</select>
+	<!-- 查询角色表 -->
+	<!-- <select id="roleShow" resultType="cn.shiro.extity.Role">		 
+   		SELECT * FROM `role`
+	</select> -->
+	
+	<!-- <insert id="addUser" parameterType="cn.shiro.extity.User">
+		insert into `user` values(DEFAULT,#{userName},#{accountName},#{password},#{credentialsSalt})
+		insert into `user`(userName,accountName,password,credentialsSalt) values(#{userName},#{accountName},#{password},#{credentialsSalt})
+	</insert> -->
+	<!-- 添加用户与角色关联表 -->
+	<!-- <insert id="addUserRole" parameterType="cn.shiro.extity.User_role">
+		insert into `user_role` values(#{userId},#{roleId})
+		insert into `user`(userName,accountName,password,credentialsSalt) values(#{userName},#{accountName},#{password},#{credentialsSalt})
+	</insert> -->
+</mapper>
